@@ -373,7 +373,7 @@ export function iniciarAnatomiaAutoStore(root) {
     b.addEventListener('click', () => irA(i)); li.append(b); lista.append(li); return b;
   });
   replay?.addEventListener('click', () => irA(0));
-  function irA(i) { T = S[i]; snap = true; if (quieto) paso(0); }
+  function irA(i) { T = S[i]; snap = true; paso(0); }
   function marcar(et, prog) {
     if (et !== etapa) { etapa = et; botones.forEach((b, i) => i === et ? b.setAttribute('aria-current', 'step') : b.removeAttribute('aria-current')); canvas.setAttribute('aria-label', `Anatomía de una instalación AutoStore. Etapa ${et + 1} de ${ETAPAS.length}: ${ETAPAS[et].n}. ${ETAPAS[et].f}`); }
     botones[et].style.setProperty('--p', (prog * 100).toFixed(1) + '%');
@@ -404,10 +404,11 @@ export function iniciarAnatomiaAutoStore(root) {
     paso(dt); raf = requestAnimationFrame(bucle);
   }
   function arrancar() { if (raf || quieto) return; ult = performance.now(); raf = requestAnimationFrame(bucle); }
-  new ResizeObserver(() => { ajustar(); if (quieto) paso(0); }).observe(stage);
+  new ResizeObserver(() => { ajustar(); paso(0); }).observe(stage);
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) arrancar(); }, { threshold: .1 }).observe(stage);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) arrancar(); });
   ajustar();
-  if (quieto) { T = S[11] + 7.5; paso(0); }
+  if (quieto) T = S[11] + 7.5;
+  paso(0);
   return { irA, S, get T() { return T; }, set T(v) { T = v; snap = true; }, paso: () => paso(0), R: Rz, cam, renderer, scene };
 }

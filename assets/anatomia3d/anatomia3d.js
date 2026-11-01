@@ -7,8 +7,8 @@ import * as W from './an3d-mundo.js';
 export const ETAPAS = [
   { n: 'Patas y soportería', f: 'Se trazan, nivelan y anclan las patas al piso.', c: '#5B6B80', d: 6 },
   { n: 'Equipo', f: 'Tramos, curva y espiral se asientan sobre su soportería.', c: '#1F5FA8', d: 11 },
-  { n: 'Eléctrico', f: 'Charola, cableado desde los motores y tablero.', c: '#D99A06', d: 8 },
-  { n: 'Control', f: 'Sensores, PLC y HMI conectados y probados.', c: '#0F9D7A', d: 6.5 },
+  { n: 'Eléctrico', f: 'Charola, cableado desde los motores y tablero.', c: '#9A6700', d: 8 },
+  { n: 'Control', f: 'Sensores, PLC y HMI conectados y probados.', c: '#0B7A5E', d: 6.5 },
   { n: 'Operación', f: 'Las cajas circulan y los indicadores confirman el estado.', c: '#2E7D32', d: 9 },
 ];
 const S = []; ETAPAS.reduce((a, e) => (S.push(a), a + e.d), 0); // inicio de cada etapa: 0, 6, 17, 25, 31.5
@@ -284,7 +284,7 @@ export function iniciarAnatomia3D(root) {
     b.addEventListener('click', () => irA(i)); li.append(b); lista.append(li); return b;
   });
   replay?.addEventListener('click', () => irA(0));
-  function irA(i) { T = S[i]; snap = true; if (quieto) paso(0); }
+  function irA(i) { T = S[i]; snap = true; paso(0); }
   function marcar(et, prog) {
     if (et !== etapa) { etapa = et; botones.forEach((b, i) => i === et ? b.setAttribute('aria-current', 'step') : b.removeAttribute('aria-current')); canvas.setAttribute('aria-label', `Anatomía de una instalación de transportadores. Etapa ${et + 1} de 5: ${ETAPAS[et].n}. ${ETAPAS[et].f}`); }
     botones[et].style.setProperty('--p', (prog * 100).toFixed(1) + '%');
@@ -316,10 +316,11 @@ export function iniciarAnatomia3D(root) {
     paso(dt); raf = requestAnimationFrame(bucle);
   }
   function arrancar() { if (raf || quieto) return; ult = performance.now(); raf = requestAnimationFrame(bucle); }
-  new ResizeObserver(() => { ajustar(); if (quieto) paso(0); }).observe(stage);
+  new ResizeObserver(() => { ajustar(); paso(0); }).observe(stage);
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) arrancar(); }, { threshold: .1 }).observe(stage);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) arrancar(); });
   ajustar();
-  if (quieto) { T = S[4] + 4; paso(0); }
+  if (quieto) T = S[4] + 4;
+  paso(0);
   return { irA, get T() { return T; }, set T(v) { T = v; snap = true; }, paso: () => paso(0), R, cam, renderer, scene };
 }

@@ -15,7 +15,7 @@
     'Armado de tableros e integración eléctrica': ['zap', 'Tableros para transportadores y automatización, con pruebas de integración.'],
     'Compras y gestión de materiales': ['package', 'Componentes, logística de entregas y gestión de proveedores.'],
     'Seguridad': ['shield-check', 'Evaluación de riesgos, permisos y supervisión de seguridad laboral.'],
-    'Almacenamiento automatizado': ['layers', 'Instalación coordinada para sistemas cúbicos.'],
+    'AutoStore': ['layers', 'Instalación coordinada para sistemas cúbicos.'],
     'Sortation': ['circle-check', 'Montaje y verificación de sistemas de clasificación.'],
     'Transportadores': ['arrow-right', 'Líneas, curvas, elevación y espirales.']
   };
@@ -127,7 +127,7 @@
     const images = key === 'almacen' ? [['cube.webp', 'Almacenamiento automatizado'], ['mezzanine.webp', 'Integración de estructuras'], ['electrical.webp', 'Instalación eléctrica']] : key === 'sortation' ? [['sorter.webp', 'Sistema de clasificación'], ['conveyors.webp', 'Transporte de materiales'], ['supervision.webp', 'Coordinación en campo']] : [['conveyors.webp', 'Transportadores y curvas'], ['mezzanine.webp', 'Integración en mezzanine'], ['sorter.webp', 'Manejo y clasificación']];
     const prefix = iconRoot.replace('assets/icons.svg', 'assets/img/');
     gallery.innerHTML = `<h2>Integración en cada tramo</h2><div class="gallery-grid">${images.map(([src, alt]) => `<figure><img src="${prefix}${src}" alt="${alt}." loading="lazy" width="1200" height="675"><figcaption>${alt.toUpperCase()}</figcaption></figure>`).join('')}</div>`;
-    techDetail.append(gallery);
+    techDetail.insertBefore(gallery, techDetail.querySelector('.page-cta'));
   }
 
   const year = document.querySelector('#year');
