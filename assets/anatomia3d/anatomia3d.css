@@ -1,0 +1,40 @@
+/* Anatomía 3D — estilos con prefijo an3d- para insertarse en una página existente */
+.an3d{--an3d-ink:#13233a;--an3d-muted:#5a6b80;--an3d-azul:#1F5FA8;--an3d-line:#dbe2ea;--an3d-bg:#f5f7fa;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;color:var(--an3d-ink);
+  max-width:1180px;margin:0 auto;padding:40px 16px;box-sizing:border-box}
+.an3d *,.an3d *::before,.an3d *::after{box-sizing:inherit}
+.an3d-head{text-align:center;max-width:720px;margin:0 auto 28px}
+.an3d-eyebrow{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--an3d-azul)}
+.an3d-head h2{margin:0 0 12px;font-size:clamp(26px,4vw,38px);line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+.an3d-head p{margin:0;font-size:17px;line-height:1.5;color:var(--an3d-muted)}
+.an3d-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+.an3d-stage{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;background:#e9edf1;
+  box-shadow:0 1px 2px rgba(19,35,58,.06),0 12px 32px -12px rgba(19,35,58,.25)}
+.an3d-stage canvas{display:block;width:100%;height:100%}
+.an3d-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.an3d-stage.is-fallback canvas{display:none}
+.an3d-stage.is-fallback .an3d-fallback{display:block}
+.an3d-panel{display:grid;gap:14px}
+.an3d-steps{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.an3d-step{width:100%;display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;text-align:left;
+  background:none;border:1px solid transparent;border-radius:12px;padding:10px 12px;cursor:pointer;color:inherit;font:inherit;
+  transition:background .2s,border-color .2s}
+.an3d-step:hover{background:#fff;border-color:var(--an3d-line)}
+.an3d-step:focus-visible{outline:2px solid var(--an3d-azul);outline-offset:2px}
+.an3d-step[aria-current="step"]{background:#fff;border-color:var(--an3d-line);box-shadow:0 1px 2px rgba(19,35,58,.05)}
+.an3d-num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;font-weight:700;font-size:13px;line-height:1}
+.an3d-txt{display:grid;gap:3px;min-width:0}
+.an3d-txt strong{font-size:15px;line-height:1.3}
+.an3d-txt>span{font-size:13px;line-height:1.4;color:var(--an3d-muted)}
+.an3d-bar{display:block;height:3px;border-radius:2px;background:var(--c);width:var(--p,0%);opacity:0;transition:width .25s linear;margin-top:4px}
+.an3d-step[aria-current="step"] .an3d-bar{opacity:.85}
+.an3d-replay{justify-self:start;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid var(--an3d-line);
+  background:#fff;color:var(--an3d-ink);font:600 14px/1 inherit;font-family:inherit;cursor:pointer}
+.an3d-replay:hover{border-color:var(--an3d-azul);color:var(--an3d-azul)}
+.an3d-replay:focus-visible{outline:2px solid var(--an3d-azul);outline-offset:2px}
+@media (max-width:900px){
+  .an3d{padding:32px 16px}
+  .an3d-grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  .an3d-stage{aspect-ratio:4/5;border-radius:14px}
+  .an3d-head p{font-size:15px}
+}
