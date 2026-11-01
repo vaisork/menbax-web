@@ -300,6 +300,7 @@ export function iniciarAnatomia3D(root) {
     objPos.y += .08 * Math.sin(T * .3);
     if (cam.aspect < 1) objPos.sub(objLook).multiplyScalar(Math.pow(1 / cam.aspect, .95)).add(objLook);
     objPos.y = Math.min(objPos.y, 8.6); // siempre bajo el techo
+    objPos.z = Math.max(objPos.z, -6.6); objPos.x = Math.max(objPos.x, -19.6); // siempre dentro de los muros (en móvil la cámara se aleja)
     if (snap) { camPos.copy(objPos); camLook.copy(objLook); } else { const k = 1 - Math.exp(-dt * 1.4); camPos.lerp(objPos, k); camLook.lerp(objLook, k); }
     cam.position.copy(camPos); cam.lookAt(camLook);
     renderer.render(scene, cam); snap = false;
